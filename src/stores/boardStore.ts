@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { writable } from 'svelte/store';
 import data from '../data/data.json';
-import type { IBoard, IColumn, ITask } from '../types/board';
+import type { IBoard, IColumn, ISubtask, ITask } from '../types/board';
 
-export const boards = writable([]);
+export const boards = writable<IBoard[]>([]);
 
 export const loadBoards = () => {
 	const loadedBoards =
@@ -168,25 +168,27 @@ export function changeTaskStatus(
 }
 
 export function toggleSubtask(
-	subtaskIndex,
-	taskIndex,
-	boardIndex,
-	columnIndex,
-	currentSubtaskState
+	subtaskIndex: number,
+	taskIndex: number,
+	boardIndex: number,
+	columnIndex: number,
+	currentSubtaskState: boolean
 ) {
 	boards.update((prev) =>
 		prev.map((board, currentBoardIndex) => {
 			if (currentBoardIndex === boardIndex) {
-				board.columns = board.columns.map((column, currentColumnIndex) => {
+				board.columns = board.columns.map((column: IColumn, currentColumnIndex: number) => {
 					if (currentColumnIndex === columnIndex) {
-						column.tasks = column.tasks.map((task, currentTaskIndex) => {
+						column.tasks = column.tasks.map((task: ITask, currentTaskIndex: number) => {
 							if (currentTaskIndex === taskIndex) {
-								task.subtasks = task.subtasks.map((subtask, currentSubtaskIndex) => {
-									if (currentSubtaskIndex === subtaskIndex) {
-										subtask.isCompleted = !currentSubtaskState;
+								task.subtasks = task.subtasks.map(
+									(subtask: ISubtask, currentSubtaskIndex: number) => {
+										if (currentSubtaskIndex === subtaskIndex) {
+											subtask.isCompleted = !currentSubtaskState;
+										}
+										return subtask;
 									}
-									return subtask;
-								});
+								);
 							}
 
 							return task;
