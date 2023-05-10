@@ -99,7 +99,7 @@ export function deleteBoard(index: number) {
 	boards.update((prev) => prev.filter((_, currentBoardIndex) => currentBoardIndex !== index));
 }
 
-export function deleteTask(boardIndex: number, columnIndex: number, taskIndex: ITask) {
+export function deleteTask(boardIndex: number, columnIndex: number, taskIndex: number) {
 	boards.update((prev) =>
 		prev.map((board, currentBoardIndex) => {
 			if (currentBoardIndex === boardIndex) {
@@ -127,7 +127,7 @@ export function changeTaskStatus(
 	boards.update((prev) =>
 		prev.map((board: IBoard, currentBoardIndex: number) => {
 			let taskStatusChanged = false;
-			let newColumns;
+			let newColumns: IColumn[];
 			if (currentBoardIndex === boardIndex) {
 				newColumns = board.columns.map((column, currentColumnIndex) => {
 					// START OF CODE BLOCK
