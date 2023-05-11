@@ -142,6 +142,8 @@ export function changeTaskStatus(
 					return column;
 					// END OF CODE BLOCK
 				});
+			} else {
+				newColumns = board.columns;
 			}
 
 			if (taskStatusChanged) {
