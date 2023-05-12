@@ -1,0 +1,9 @@
+export enum modalTypes {
+	VIEWTASK,
+	ADDTASK,
+	EDITTASK,
+	ADDBOARD,
+	EDITBOARD,
+	DELETEBOARD,
+	DELETETASK
+}
