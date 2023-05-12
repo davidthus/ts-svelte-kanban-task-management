@@ -1,16 +1,29 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { writable } from 'svelte/store';
 import { themeTypes } from '../constants/themeTypes';
+import type { IBoard } from '../types/board';
 
 const initialState = {
 	sidebarOpen: true,
 	theme: themeTypes.DARKTHEME
 };
 
-export const data = writable(initialState);
+export const data = writable<{
+	sidebarOpen: boolean;
+	theme: number;
+	boards?: IBoard[];
+	activeBoard?: string;
+}>(initialState);
 
 export const loadData = () => {
-	const loadedData = JSON.parse(localStorage.getItem('data')) || initialState;
-	const activeBoard = JSON.parse(localStorage.getItem('boards'))[0].name || data.boards[0].name;
+	const loadedData =
+		localStorage.getItem('data') !== null
+			? JSON.parse(localStorage.getItem('data')!)
+			: initialState;
+	const activeBoard =
+		localStorage.getItem('boards') !== null
+			? JSON.parse(localStorage.getItem('boards')!)[0].name
+			: data.boards[0].name;
 
 	if (loadedData?.activeBoard) {
 		data.set(loadedData);
@@ -35,6 +48,6 @@ export function toggleTheme() {
 	}));
 }
 
-export function toggleActiveBoard(newActiveBoard) {
+export function toggleActiveBoard(newActiveBoard: string) {
 	data.update((prev) => ({ ...prev, activeBoard: newActiveBoard }));
 }
