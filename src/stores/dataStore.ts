@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { writable } from 'svelte/store';
 import { themeTypes } from '../constants/themeTypes';
-import type { IBoard } from '../types/board';
+import Data from '../data/data.json';
 
 const initialState = {
 	sidebarOpen: true,
@@ -11,7 +11,6 @@ const initialState = {
 export const data = writable<{
 	sidebarOpen: boolean;
 	theme: number;
-	boards?: IBoard[];
 	activeBoard?: string;
 }>(initialState);
 
@@ -23,7 +22,7 @@ export const loadData = () => {
 	const activeBoard =
 		localStorage.getItem('boards') !== null
 			? JSON.parse(localStorage.getItem('boards')!)[0].name
-			: data.boards[0].name;
+			: Data.boards[0].name;
 
 	if (loadedData?.activeBoard) {
 		data.set(loadedData);
