@@ -3,3 +3,8 @@ export enum buttonStateTypes {
 	HOVER,
 	ACTIVE
 }
+
+export type buttonStateType =
+	| buttonStateTypes.DEFAULT
+	| buttonStateTypes.ACTIVE
+	| buttonStateTypes.HOVER;
