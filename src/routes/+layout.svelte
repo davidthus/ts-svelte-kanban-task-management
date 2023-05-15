@@ -1,11 +1,11 @@
 <script lang="ts">
-	import Modal from '$lib/modal.svelte';
-	import Navbar from '$lib/navbar.svelte';
-	import Sidebar from '$lib/sidebar.svelte';
 	import { onDestroy } from 'svelte';
 	import '../app.css';
 	import { ShowIcon } from '../assets';
 	import { themeTypes } from '../constants/themeTypes';
+	import Modal from '../lib/modal.svelte';
+	import Navbar from '../lib/navbar.svelte';
+	import Sidebar from '../lib/sidebar.svelte';
 	import { boards } from '../stores/boardStore';
 	import { data, toggleSidebar } from '../stores/dataStore';
 	import { modalInfo } from '../stores/modalStore';
