@@ -2,20 +2,35 @@
 	import { createEventDispatcher } from 'svelte';
 	import { CrossIcon } from '../assets';
 	import { BUTTONTYPES } from '../constants/buttonTypes';
+	import type { IColumn } from '../types/board';
 	import Button from './button.svelte';
 
-	export let config = {};
+	interface configType {
+		isError: boolean;
+		isTextarea: boolean;
+		isArray: boolean;
+		isBoard: boolean;
+	}
+
+	type valueObject = { name: string; columns: IColumn[] } | { title: string; isCompleted: boolean };
+
+	export let config: configType = {
+		isError: false,
+		isTextarea: false,
+		isArray: false,
+		isBoard: false
+	};
 	export let placeholderText = '';
-	export let placeholderTexts = [];
+	export let placeholderTexts: string[] = [];
 	export let value = '';
-	export let values = [];
-	export let errors = [];
+	export let values: valueObject[] = [];
+	export let errors: { name: string }[] = [];
 	export let errorMessage = '';
 	export let name = '';
-	export let handleChange = '';
+	export let handleChange: any;
 
 	$: console.log(name, values);
-	$: ({ isError = false, isTextarea = false, isArray = false, isBoard = false } = config);
+	$: ({ isError, isTextarea, isArray, isBoard } = config);
 	const dispatch = createEventDispatcher();
 
 	const inputGroupStyles = 'text-left text-grey bodym dark:text-white flex flex-col gap-2 w-full';

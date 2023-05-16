@@ -19,7 +19,7 @@
 			}
 			return errs;
 		},
-		onSubmit: (values) => {
+		onSubmit: (values: any) => {
 			alert(JSON.stringify(values));
 		}
 	});
