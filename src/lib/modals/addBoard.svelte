@@ -29,7 +29,7 @@
 
 	const add = () => {
 		$form.columns = $form.columns.concat({ name: '', tasks: [] });
-		$errors.columns = $errors.columns.concat({ name: '', tasks: [] });
+		$errors.columns = $errors.columns.concat({ name: '', tasks: '' });
 	};
 	const remove = (event: any) => () => {
 		$form.columns = $form.columns.filter((u: IColumn, j: number) => j !== event.detail.index);
@@ -41,7 +41,7 @@
 <form class="flex w-full flex-col gap-6" on:submit={handleSubmit}>
 	<InputGroup
 		name="name"
-		config={{ isError: $errors.name }}
+		config={{ isError: Boolean($errors.name) }}
 		placeholderText="e.g. Take coffee break"
 		errorMessage={$errors.name}
 		{handleChange}
@@ -51,7 +51,7 @@
 		on:add={add}
 		on:remove={remove}
 		name="columns"
-		config={{ isArray: true, isError: $errors.columns, isBoard: true }}
+		config={{ isArray: true, isError: Boolean($errors.columns), isBoard: true }}
 		errorMessage={$errors.columns}
 		errors={$errors.columns}
 		{handleChange}
