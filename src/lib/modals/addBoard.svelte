@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { createForm } from 'svelte-forms-lib';
 	import { BUTTONTYPES } from '../../constants/buttonTypes';
+	import type { IColumn } from '../../types/board';
 	import Button from '../button.svelte';
 	import InputGroup from '../inputGroup.svelte';
 
@@ -8,12 +9,12 @@
 		initialValues: {
 			name: '',
 			columns: [
-				{ name: 'Todo', columns: [] },
-				{ name: 'Doing', columns: [] }
+				{ name: 'Todo', tasks: [] },
+				{ name: 'Doing', tasks: [] }
 			]
 		},
-		validate: (values) => {
-			let errs = {};
+		validate: (values: { name: string; columns: IColumn[] }) => {
+			let errs: any = {};
 			if (values.name === '') {
 				errs['name'] = "Can't be empty";
 			}
@@ -30,9 +31,9 @@
 		$form.columns = $form.columns.concat({ name: '', tasks: [] });
 		$errors.columns = $errors.columns.concat({ name: '', tasks: [] });
 	};
-	const remove = (event) => () => {
-		$form.columns = $form.columns.filter((u, j) => j !== event.detail.index);
-		$errors.columns = $errors.columns.filter((u, j) => j !== event.detail.index);
+	const remove = (event: any) => () => {
+		$form.columns = $form.columns.filter((u: IColumn, j: number) => j !== event.detail.index);
+		$errors.columns = $errors.columns.filter((u: IColumn, j: number) => j !== event.detail.index);
 	};
 </script>
 

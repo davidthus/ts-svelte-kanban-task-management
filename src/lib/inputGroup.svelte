@@ -6,10 +6,10 @@
 	import Button from './button.svelte';
 
 	interface configType {
-		isError: boolean;
-		isTextarea: boolean;
-		isArray: boolean;
-		isBoard: boolean;
+		isError?: boolean;
+		isTextarea?: boolean;
+		isArray?: boolean;
+		isBoard?: boolean;
 	}
 
 	type valueObject = { name: string; columns: IColumn[] } | { title: string; isCompleted: boolean };
