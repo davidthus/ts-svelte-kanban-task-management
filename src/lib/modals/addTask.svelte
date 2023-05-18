@@ -5,7 +5,7 @@
 	import { addTask, boards } from '../../stores/boardStore';
 	import Button from '../button.svelte';
 	import InputGroup from '../inputGroup.svelte';
-	export let modalDetails;
+	export let modalDetails: { boardIndex: number };
 
 	$: ({ boardIndex } = modalDetails);
 
