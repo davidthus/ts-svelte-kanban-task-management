@@ -29,7 +29,7 @@
 			]
 		},
 		validate: (values) => {
-			let errs = { subtasks: [] };
+			let errs: { title?: string; subtasks?: { title: string }[] } = { subtasks: [] };
 			if (values.title === '') {
 				errs['title'] = "Can't be empty";
 			}
@@ -52,10 +52,10 @@
 		$form.subtasks = $form.subtasks.concat({ name: '', tasks: [] });
 		$errors.subtasks = $errors.subtasks.concat({ name: '', tasks: [] });
 	};
-	const remove = (event) => () => {
+	const remove = (event: any) => () => {
 		console.log(event);
 		$form.subtasks = $form.subtasks.filter((u, j) => j !== event.detail.index);
-		$errors.subtasks = $errors.subtasks.filter((u, j) => j !== event.detail.index);
+		$errors.subtasks = $errors.subtasks.filter((u, j: number) => j !== event.detail.index);
 	};
 </script>
 
@@ -63,14 +63,14 @@
 <form on:submit={handleSubmit} class="flex w-full flex-col gap-6">
 	<InputGroup
 		name="title"
-		config={{ isTextArea: false, isError: $errors.title }}
+		config={{ isTextarea: false, isError: Boolean($errors.title) }}
 		placeholderText="e.g. Take coffee break"
 		errorMessage={$errors.title}
 		{handleChange}
 		value={$form.title}>Title</InputGroup
 	>
 	<InputGroup
-		config={{ isTextArea: true }}
+		config={{ isTextarea: true }}
 		{handleChange}
 		placeholderText="e.g. It’s always good to take a break. This 15 minute break will 
 	recharge the batteries a little."
@@ -80,7 +80,7 @@
 		on:add={add}
 		on:remove={remove}
 		{handleChange}
-		config={{ isArray: true, isError: $errors.subtasks }}
+		config={{ isArray: true, isError: Boolean($errors.subtasks) }}
 		errorMessage={$errors.subtasks}
 		errors={$errors.subtasks}
 		values={$form.subtasks}
