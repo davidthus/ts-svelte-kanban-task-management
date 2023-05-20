@@ -4,7 +4,7 @@
 	import { data, toggleActiveBoard } from '../../stores/dataStore';
 	import { closeModal } from '../../stores/modalStore';
 	import Button from '../button.svelte';
-	export let modalDetails;
+	export let modalDetails: { boardIndex: number };
 
 	$: isMoreThanOneBoard = $boards.length > 1;
 	$: nextActiveBoard = !isMoreThanOneBoard
@@ -15,7 +15,7 @@
 
 	function handleDelete() {
 		deleteBoard(boardIndex);
-		toggleActiveBoard(nexActiveBoard);
+		toggleActiveBoard(nextActiveBoard);
 		closeModal();
 	}
 

@@ -11,7 +11,7 @@ const initialState = {
 export const data = writable<{
 	sidebarOpen: boolean;
 	theme: number;
-	activeBoard?: string;
+	activeBoard?: string | null;
 }>(initialState);
 
 export const loadData = () => {
@@ -47,6 +47,6 @@ export function toggleTheme() {
 	}));
 }
 
-export function toggleActiveBoard(newActiveBoard: string) {
+export function toggleActiveBoard(newActiveBoard: string | null) {
 	data.update((prev) => ({ ...prev, activeBoard: newActiveBoard }));
 }
