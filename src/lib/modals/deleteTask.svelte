@@ -3,7 +3,7 @@
 	import { boards, deleteTask } from '../../stores/boardStore';
 	import { closeModal } from '../../stores/modalStore';
 	import Button from '../button.svelte';
-	export let modalDetails;
+	export let modalDetails: { boardIndex: number; columnIndex: number; taskIndex: number };
 	$: ({ boardIndex, columnIndex, taskIndex } = modalDetails);
 
 	function handleDelete() {
