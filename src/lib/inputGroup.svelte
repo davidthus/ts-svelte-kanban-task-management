@@ -71,12 +71,13 @@
 						bind:value={value.name}
 					/>
 					<button
-						on:click={() => {
+						on:click={(event) => {
 							dispatch('remove', { index });
-							console.log('clickeddf');
 						}}
-						class="bg-transparent border-0 outline-0"><CrossIcon /></button
+						class="bg-transparent border-0 outline-0"
 					>
+						<CrossIcon />
+					</button>
 				</div>
 			{/each}
 			<div class="mt-1 w-full">

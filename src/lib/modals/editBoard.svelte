@@ -4,7 +4,7 @@
 	import { boards } from '../../stores/boardStore';
 	import Button from '../button.svelte';
 	import InputGroup from '../inputGroup.svelte';
-	export let modalDetails;
+	export let modalDetails: { boardIndex: number };
 
 	$: ({ boardIndex } = modalDetails);
 	$: ({ name, columns } = $boards[boardIndex]);
@@ -16,7 +16,7 @@
 			columns
 		},
 		validate: (values) => {
-			let errs = {};
+			let errs: { name?: string } = {};
 			if (values.name === '') {
 				errs['name'] = "Can't be empty";
 			}
@@ -33,10 +33,10 @@
 		$form.columns = $form.columns.concat({ name: '', tasks: [] });
 		$errors.columns = $errors.columns.concat({ name: '', tasks: [] });
 	};
-	const remove = (event) => () => {
+	const remove = (event: any) => () => {
 		console.log(event);
 		$form.columns = $form.columns.filter((u, j) => j !== event.details.index);
-		$errors.columns = $errors.columns.filter((u, j) => j !== event.details.index);
+		$errors.columns = $errors.columns.filter((u, j: number) => j !== event.details.index);
 	};
 </script>
 
@@ -44,7 +44,7 @@
 <form class="flex w-full flex-col gap-6" on:submit={handleSubmit}>
 	<InputGroup
 		name="name"
-		config={{ isError: $errors.name }}
+		config={{ isError: Boolean($errors.name) }}
 		placeholderText="e.g. Take coffee break"
 		errorMessage={$errors.name}
 		{handleChange}
@@ -55,7 +55,7 @@
 		on:remove={remove}
 		name="columns"
 		values={$form.columns}
-		config={{ isArray: true, isError: $errors.columns, isBoard: true }}
+		config={{ isArray: true, isError: Boolean($errors.columns), isBoard: true }}
 		errorMessage={$errors.columns}
 		errors={$errors.columns}
 		{handleChange}>Board Columns</InputGroup

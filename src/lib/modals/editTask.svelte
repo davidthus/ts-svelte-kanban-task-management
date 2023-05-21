@@ -1,9 +1,10 @@
 <script lang="ts">
+	import { createForm } from 'svelte-forms-lib';
 	import { ArrowDownIcon } from '../../assets';
 	import { boards, changeTaskStatus } from '../../stores/boardStore';
 	import { changeModalDetails } from '../../stores/modalStore';
 	import InputGroup from '../inputGroup.svelte';
-	export let modalDetails;
+	export let modalDetails: { boardIndex: number; columnIndex: number; taskIndex: number };
 
 	$: ({ boardIndex, columnIndex, taskIndex } = modalDetails);
 	$: task = $boards[boardIndex].columns[columnIndex].tasks[taskIndex];
@@ -17,8 +18,8 @@
 			subtasks: task.subtasks,
 			status: task.status
 		},
-		validate: (values) => {
-			let errs = {};
+		validate: (values: any) => {
+			let errs: { title?: string } = {};
 			if (values.title === '') {
 				errs['title'] = "Can't be empty";
 			}
@@ -30,9 +31,9 @@
 	});
 
 	const add = () => {
-		$form.subtasks = $form.subtasks.concat({ title: '', isCompleted: '' });
+		$form.subtasks = [...$form.subtasks, { title: '', isCompleted: false }];
 	};
-	const remove = (i) => () => {
+	const remove = (i: number) => () => {
 		$form.subtasks = $form.subtasks.filter((u, j) => j !== i);
 	};
 </script>
@@ -41,14 +42,14 @@
 <form on:submit={handleSubmit}>
 	<InputGroup
 		name="title"
-		config={{ isTextArea: false, isError: $errors.title }}
+		config={{ isTextarea: false, isError: Boolean($errors.title) }}
 		placeholderText="e.g. Take coffee break"
 		errorMessage={$errors.title}
 		{handleChange}
 		value={$form.title}>Title</InputGroup
 	>
 	<InputGroup
-		config={{ isTextArea: true }}
+		config={{ isTextarea: true }}
 		{handleChange}
 		placeholderText="e.g. It’s always good to take a break. This 15 minute break will 
 	recharge the batteries a little."
@@ -58,7 +59,7 @@
 		on:add={add}
 		on:remove={remove}
 		{handleChange}
-		config={{ isArray: true, isError: $errors.subtasks }}
+		config={{ isArray: true, isError: Boolean($errors.subtasks) }}
 		errorMessage={$errors.subtasks}
 		errors={$errors.subtasks}
 		values={$form.subtasks}
