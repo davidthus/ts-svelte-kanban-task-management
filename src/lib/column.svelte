@@ -1,10 +1,11 @@
 <script lang="ts">
+	import type { IColumn } from '../types/board';
 	import Circle from './circle.svelte';
 	import TaskCard from './taskCard.svelte';
 
-	export let column;
-	export let columnIndex;
-	export let boardIndex;
+	export let column: IColumn;
+	export let columnIndex: number;
+	export let boardIndex: number;
 </script>
 
 <section class="flex flex-col gap-6 min-w-[280px] w-[280px] pb-4">
