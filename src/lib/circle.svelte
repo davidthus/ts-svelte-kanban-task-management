@@ -1,7 +1,7 @@
 <script lang="ts">
-	export let columnIndex;
+	export let columnIndex: number;
 
-	let color;
+	let color: string;
 
 	// check the columnIndex to determine the color of the circle
 	$: if (columnIndex === 0 || columnIndex % 3 === 0) {
