@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { BUTTONTYPES } from '../constants/buttonTypes';
-	export let config: { disabled: boolean; buttonType: number };
+	export let config: { disabled?: boolean; buttonType: number };
 	export let type: 'button' | 'submit' | 'reset' = 'button';
 
 	const baseButtonStyles =
