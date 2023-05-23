@@ -1,12 +1,12 @@
 <script lang="ts">
 	import { BUTTONTYPES } from '../constants/buttonTypes';
-	export let config;
-	export let type = 'button';
+	export let config: { disabled: boolean; buttonType: number };
+	export let type: 'button' | 'submit' | 'reset' = 'button';
 
 	const baseButtonStyles =
 		'rounded-full flex-1 border-0 flex justify-center items-center py-2 px-12';
 	const disabledStyles = 'opacity-25 cursor-default';
-	let specificButtonStyles;
+	let specificButtonStyles: string;
 
 	switch (config.buttonType) {
 		case BUTTONTYPES.PRIMARYL:
