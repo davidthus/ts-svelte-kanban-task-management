@@ -2,9 +2,9 @@
 	import { createForm } from 'svelte-forms-lib';
 	import { ArrowDownIcon } from '../../assets';
 	import { boards, changeTaskStatus } from '../../stores/boardStore';
-	import { changeModalDetails } from '../../stores/modalStore';
+	import { changeModalDetails, type IDetails } from '../../stores/modalStore';
 	import InputGroup from '../inputGroup.svelte';
-	export let modalDetails: { boardIndex: number; columnIndex: number; taskIndex: number };
+	export let modalDetails: IDetails;
 
 	$: ({ boardIndex, columnIndex, taskIndex } = modalDetails);
 	$: task = $boards[boardIndex].columns[columnIndex].tasks[taskIndex];

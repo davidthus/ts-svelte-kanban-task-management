@@ -1,10 +1,10 @@
 import { writable } from 'svelte/store';
 import { modalTypes } from '../constants/modalTypes';
 
-interface IDetails {
-	taskIndex: number | null;
-	columnIndex: number | null;
-	boardIndex: number | null;
+export interface IDetails {
+	taskIndex?: number | null;
+	columnIndex?: number | null;
+	boardIndex: number;
 }
 
 export const modalInfo = writable<{ isModalOpen: boolean; modalType: number; details: IDetails }>({
@@ -13,7 +13,7 @@ export const modalInfo = writable<{ isModalOpen: boolean; modalType: number; det
 	details: {
 		taskIndex: null,
 		columnIndex: null,
-		boardIndex: null
+		boardIndex: 0
 	}
 });
 
@@ -32,7 +32,7 @@ export function closeModal() {
 		details: {
 			taskIndex: null,
 			columnIndex: null,
-			boardIndex: null
+			boardIndex: 0
 		}
 	});
 }

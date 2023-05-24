@@ -1,20 +1,25 @@
 <script lang="ts">
 	import { BUTTONTYPES } from '../../constants/buttonTypes';
 	import { boards, deleteTask } from '../../stores/boardStore';
-	import { closeModal } from '../../stores/modalStore';
+	import { closeModal, type IDetails } from '../../stores/modalStore';
 	import Button from '../button.svelte';
-	export let modalDetails: { boardIndex: number; columnIndex: number; taskIndex: number };
+	export let modalDetails: IDetails;
 	$: ({ boardIndex, columnIndex, taskIndex } = modalDetails);
 
 	function handleDelete() {
-		deleteTask(boardIndex, columnIndex, taskIndex);
+		if (typeof columnIndex === 'number' && typeof taskIndex === 'number') {
+			deleteTask(boardIndex, columnIndex, taskIndex);
+		}
 		closeModal();
 	}
 
 	function handleCancel() {
 		closeModal();
 	}
-	$: taskName = $boards[boardIndex].columns[columnIndex].tasks[taskIndex].title;
+	$: taskName =
+		typeof columnIndex === 'number' && typeof taskIndex === 'number'
+			? $boards[boardIndex].columns[columnIndex].tasks[taskIndex].title
+			: '';
 </script>
 
 <h2 class="text-red text-left headingl">Delete this task?</h2>

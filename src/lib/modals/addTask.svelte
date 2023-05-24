@@ -41,7 +41,7 @@
 			});
 			return errs;
 		},
-		onSubmit: (values) => {
+		onSubmit: ({ values }) => {
 			alert(JSON.stringify(values));
 			const columnIndex = boardColumns.findIndex((column) => column.name === taskStatus);
 			addTask({ values, status: taskStatus }, boardIndex, columnIndex);
