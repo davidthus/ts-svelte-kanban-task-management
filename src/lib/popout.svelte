@@ -3,8 +3,8 @@
 	import { clickOutside } from '../utils/clickOutside';
 
 	export let navbarOptions = false;
-	export let handleEdit;
-	export let handleDelete;
+	export let handleEdit: () => void;
+	export let handleDelete: () => void;
 
 	let isOptionsShowing = false;
 	function toggleOptions() {
