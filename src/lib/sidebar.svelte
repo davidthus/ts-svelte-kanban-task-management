@@ -25,7 +25,7 @@
 			{/if}
 		</menu>
 		<button
-			on:click={() => openModal({ modalType: modalTypes.ADDBOARD, details: {} })}
+			on:click={() => openModal({ modalType: modalTypes.ADDBOARD, details: { boardIndex: 1 } })}
 			class="flex items-center gap-4 pl-8 text-purple headingm hover:cursor-pointer"
 			><BoardIcon buttonState={buttonStateTypes.HOVER} />+ Create New Board</button
 		>

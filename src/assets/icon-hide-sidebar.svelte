@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { buttonStateTypes } from '../constants/buttonStateTypes';
-	export let buttonState = buttonStateTypes.DEFAULT;
+	import { buttonStateTypes, type buttonStateType } from '../constants/buttonStateTypes';
+	export let buttonState: buttonStateType = buttonStateTypes.DEFAULT;
 
-	let color;
+	let color: string;
 
 	$: switch (buttonState) {
 		case buttonStateTypes.DEFAULT:
