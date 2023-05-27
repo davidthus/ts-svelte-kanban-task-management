@@ -2,7 +2,7 @@
 	import { MoonIcon, SunIcon } from '../assets';
 	import { themeTypes } from '../constants/themeTypes';
 	import { data } from '../stores/dataStore';
-	export let toggleTheme;
+	export let toggleTheme: () => void;
 
 	const lightStyles = 'left-[3px]';
 	const darkStyles = 'translate-x-[20px]';
