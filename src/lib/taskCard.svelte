@@ -1,11 +1,12 @@
 <script lang="ts">
 	import { modalTypes } from '../constants/modalTypes';
 	import { openModal } from '../stores/modalStore';
+	import type { ITask } from '../types/board';
 	import { subtasksCompleted } from '../utils/subtasksCompleted';
-	export let task;
-	export let taskIndex;
-	export let columnIndex;
-	export let boardIndex;
+	export let task: ITask;
+	export let taskIndex: number;
+	export let columnIndex: number;
+	export let boardIndex: number;
 
 	$: viewTaskModalPayload = {
 		modalType: modalTypes.VIEWTASK,
