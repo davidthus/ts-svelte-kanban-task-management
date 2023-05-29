@@ -110,7 +110,9 @@
 						<!-- svelte-ignore a11y-click-events-have-key-events -->
 						<li
 							on:click={() => {
-								changeTaskStatus(task, boardIndex, newColumnIndex, columnIndex, taskIndex);
+								if (task) {
+									changeTaskStatus(task, boardIndex, newColumnIndex, columnIndex, taskIndex);
+								}
 								const newTaskIndex =
 									newColumnIndex === columnIndex
 										? taskIndex
