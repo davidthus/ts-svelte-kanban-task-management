@@ -120,7 +120,7 @@ export function deleteTask(boardIndex: number, columnIndex: number, taskIndex: n
 export function changeTaskStatus(
 	task: ITask,
 	boardIndex: number,
-	columnIndex: number,
+	columnIndex: number | null | undefined,
 	oldColumnIndex: number,
 	taskIndex: number
 ) {
@@ -171,9 +171,9 @@ export function changeTaskStatus(
 
 export function toggleSubtask(
 	subtaskIndex: number,
-	taskIndex: number,
+	taskIndex: number | null | undefined,
 	boardIndex: number,
-	columnIndex: number,
+	columnIndex: number | null | undefined,
 	currentSubtaskState: boolean
 ) {
 	boards.update((prev) =>
